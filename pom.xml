@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.mrgatto</groupId>
+	<artifactId>spring-boot-nitro-enclaves-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<name>spring-boot-nitro-enclaves</name>
+	<description>Spring Boot library for easy creation of AWS Nitro Enclave applications</description>
+	<url>https://github.com/mrgatto/spring-boot-nitro-enclaves</url>
+
+	<properties>
+		<sonar.projectKey>spring-boot-nitro-enclaves</sonar.projectKey>
+		<sonar.organization>spring-boot-nitro-enclaves</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	</properties>
+
+	<modules>
+		<module>spring-boot-nitro-enclaves</module>
+	</modules>
+
+</project>
