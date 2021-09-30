@@ -110,12 +110,13 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private ActionHandler<?, ?> getHandler(EnclaveRequest request) {
-		ActionHandler<?, ? > handlerFound = this.handlers.stream()
-				.filter(h -> h.canHandle(request))
-				.findFirst()
-				.orElseThrow(() -> new IllegalStateException("No handler found for request " + request));
+		for (ActionHandler<?, ?> aHandler : this.handlers) {
+			if (aHandler.canHandle(request)) {
+				return aHandler;
+			}
+		}
 
-		return handlerFound;
+		throw new IllegalStateException("No handler found for request " + request);
 	}
 
 }
