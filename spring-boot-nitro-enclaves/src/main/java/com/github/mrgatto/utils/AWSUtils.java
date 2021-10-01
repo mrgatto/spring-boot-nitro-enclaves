@@ -15,6 +15,10 @@ public class AWSUtils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AWSUtils.class);
 
+	private AWSUtils() {
+
+	}
+
 	public static AWSCredential getAWSSessionToken() {
 		Map<String, IamSecurityCredential> securityCredentialsMap = EC2MetadataUtils.getIamSecurityCredentials();
 

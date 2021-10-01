@@ -8,21 +8,19 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import com.github.mrgatto.enclave.server.network.Listener;
 import com.github.mrgatto.enclave.server.network.ListenerConnection;
 import com.github.mrgatto.enclave.server.network.ListenerConsumer;
 
-@Component
 public class NitroEnclaveServer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NitroEnclaveServer.class);
 
-	private Listener clientListener;
+	private final Listener clientListener;
 
-	private ListenerConsumer listenerConsumer;
+	private final ListenerConsumer listenerConsumer;
 
 	public NitroEnclaveServer(Listener clientListener, ListenerConsumer listenerConsumer) {
 		this.clientListener = clientListener;

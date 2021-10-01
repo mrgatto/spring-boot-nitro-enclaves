@@ -1,6 +1,7 @@
 package com.github.mrgatto.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,8 @@ import com.github.mrgatto.host.NitroEnclaveClient;
 import com.github.mrgatto.host.network.HostClient;
 import com.github.mrgatto.host.network.TCPSocketHostClient;
 import com.github.mrgatto.host.network.VSockHostClient;
+import com.github.mrgatto.network.DefaultSocketTLV;
+import com.github.mrgatto.network.SocketTLV;
 import com.github.mrgatto.utils.JsonMapper;
 
 @Configuration
@@ -21,23 +24,26 @@ public class HostConfiguration {
 	private Integer cid;
 
 	@Bean
+	@ConditionalOnMissingBean
+	public SocketTLV socketTLV() {
+		return new DefaultSocketTLV();
+	}
+
+	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "tcp", matchIfMissing = true)
-	public HostClient tcpSocketHostClient() {
-		TCPSocketHostClient tcpHostClient = new TCPSocketHostClient(this.port);
-		return tcpHostClient;
+	public HostClient tcpSocketHostClient(SocketTLV socketTLV) {
+		return new TCPSocketHostClient(this.port, socketTLV);
 	}
 
 	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "vsock")
-	public HostClient vsockHostClient() {
-		VSockHostClient tcpHostClient = new VSockHostClient(this.port, this.cid);
-		return tcpHostClient;
+	public HostClient vsockHostClient(SocketTLV socketTLV) {
+		return new VSockHostClient(this.port, this.cid, socketTLV);
 	}
 
 	@Bean
 	public NitroEnclaveClient nitroEnclaveClient(HostClient hostClient, JsonMapper jsonMapper) {
-		NitroEnclaveClient nitroClient = new NitroEnclaveClient(jsonMapper, hostClient);
-		return nitroClient;
+		return new NitroEnclaveClient(jsonMapper, hostClient);
 	}
 
 }

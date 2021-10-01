@@ -19,7 +19,7 @@ public class VSockListener implements Listener {
 
 	private ServerVSock serverVSocket;
 
-	private Integer port;
+	private final Integer port;
 
 	public VSockListener(Integer port) {
 		this.port = port;

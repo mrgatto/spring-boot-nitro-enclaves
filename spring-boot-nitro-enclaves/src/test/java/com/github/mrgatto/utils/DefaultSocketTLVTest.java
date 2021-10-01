@@ -9,7 +9,12 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class SocketTLVTest {
+import com.github.mrgatto.network.DefaultSocketTLV;
+import com.github.mrgatto.network.SocketTLV;
+
+class DefaultSocketTLVTest {
+
+	private SocketTLV socketTLV = new DefaultSocketTLV();
 
 	@Test
 	void writeReadTest() throws IOException {
@@ -22,16 +27,16 @@ class SocketTLVTest {
 				+ " Proin ut fringilla nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		SocketTLV.sendContent(content.getBytes(), baos);
+		this.socketTLV.sendContent(content.getBytes(), baos);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		byte[] result = SocketTLV.receiveContent(bais);
+		byte[] result = this.socketTLV.receiveContent(bais);
 
 		Assertions.assertEquals(content, new String(result));
 	}
 
 	@Test
-	void writeReadBigTest() throws IOException {
+	void writeReadBigContentTest() throws IOException {
 
 		final String content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod mi erat,"
 				+ " quis cursus quam facilisis et. Aenean vestibulum nisi id posuere aliquam. Nullam gravida a elit id elementum."
@@ -40,17 +45,17 @@ class SocketTLVTest {
 				+ " Aliquam erat volutpat. Nullam at vestibulum leo. Suspendisse malesuada neque eu odio rhoncus porta."
 				+ " Proin ut fringilla nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-		final String bigContent = IntStream.range(0, 10)
+		final String bigContent = IntStream.range(0, 30)
 			.mapToObj(i -> content)
 			.collect(Collectors.joining());
 
 		Assertions.assertTrue(bigContent.getBytes().length > 1024);
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		SocketTLV.sendContent(bigContent.getBytes(), baos);
+		this.socketTLV.sendContent(bigContent.getBytes(), baos);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		byte[] result = SocketTLV.receiveContent(bais);
+		byte[] result = this.socketTLV.receiveContent(bais);
 
 		Assertions.assertEquals(bigContent, new String(result));
 	}

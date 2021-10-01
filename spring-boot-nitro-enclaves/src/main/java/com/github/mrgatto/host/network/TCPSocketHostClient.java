@@ -10,16 +10,14 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.mrgatto.utils.SocketTLV;
+import com.github.mrgatto.network.SocketTLV;
 
-public class TCPSocketHostClient implements HostClient {
+public class TCPSocketHostClient extends AbstractSocketHostClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TCPSocketHostClient.class);
 
-	private Integer port;
-
-	public TCPSocketHostClient(Integer port) {
-		this.port = port;
+	public TCPSocketHostClient(Integer port, SocketTLV socketTLV) {
+		super(port, socketTLV);
 	}
 
 	@PostConstruct
@@ -39,9 +37,9 @@ public class TCPSocketHostClient implements HostClient {
 			in = clientSocket.getInputStream();
 			out = clientSocket.getOutputStream();
 
-			SocketTLV.sendContent(content, out);
+			this.socketTLV.sendContent(content, out);
 
-			byte[] rcvd = SocketTLV.receiveContent(in);
+			byte[] rcvd = this.socketTLV.receiveContent(in);
 			LOG.info("Received {} bytes", rcvd.length);
 
 			return rcvd;

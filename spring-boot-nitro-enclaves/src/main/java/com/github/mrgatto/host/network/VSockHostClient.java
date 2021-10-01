@@ -9,21 +9,19 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.mrgatto.utils.SocketTLV;
+import com.github.mrgatto.network.SocketTLV;
 
 import solutions.cloudarchitects.vsockj.VSock;
 import solutions.cloudarchitects.vsockj.VSockAddress;
 
-public class VSockHostClient implements HostClient {
+public class VSockHostClient extends AbstractSocketHostClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(VSockHostClient.class);
 
-	private Integer port;
-
 	private Integer cid;
 
-	public VSockHostClient(Integer port, Integer cid) {
-		this.port = port;
+	public VSockHostClient(Integer port, Integer cid, SocketTLV socketTLV) {
+		super(port, socketTLV);
 		this.cid = cid;
 	}
 
@@ -44,9 +42,9 @@ public class VSockHostClient implements HostClient {
 			in = clientSocket.getInputStream();
 			out = clientSocket.getOutputStream();
 
-			SocketTLV.sendContent(content, out);
+			this.socketTLV.sendContent(content, out);
 
-			byte[] rcvd = SocketTLV.receiveContent(in);
+			byte[] rcvd = this.socketTLV.receiveContent(in);
 			LOG.info("Received {} bytes", rcvd.length);
 
 			return rcvd;

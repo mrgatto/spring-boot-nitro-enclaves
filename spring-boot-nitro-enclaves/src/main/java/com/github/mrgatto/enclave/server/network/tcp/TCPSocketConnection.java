@@ -9,7 +9,7 @@ import com.github.mrgatto.enclave.server.network.ListenerConnection;
 
 public class TCPSocketConnection implements ListenerConnection {
 
-	private Socket socket;
+	private final Socket socket;
 
 	public TCPSocketConnection(Socket socket) {
 		this.socket = socket;

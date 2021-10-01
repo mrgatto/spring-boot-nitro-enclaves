@@ -12,13 +12,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Wrapper class for JSON serialization/deserialization.
  *
- *
  */
 public class JsonMapper {
 
 	private static final Logger LOG = LoggerFactory.getLogger(JsonMapper.class);
 
-	private ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 
 	public JsonMapper(ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
@@ -34,7 +33,7 @@ public class JsonMapper {
 		} catch (JsonProcessingException e) {
 			String error = "Error in serialize object to format";
 			LOG.error(error, e);
-			throw new IllegalStateException(error);
+			throw new RuntimeException(error);
 		}
 	}
 
@@ -44,7 +43,7 @@ public class JsonMapper {
 		} catch (JsonProcessingException e) {
 			String error = "Error in serialize object to format";
 			LOG.error(error, e);
-			throw new IllegalStateException(error);
+			throw new RuntimeException(error);
 		}
 	}
 
@@ -54,7 +53,7 @@ public class JsonMapper {
 		} catch (Exception e) {
 			String error = "Error in deserialize format to object";
 			LOG.error(error, e);
-			throw new IllegalStateException(error);
+			throw new RuntimeException(error);
 		}
 	}
 
@@ -64,7 +63,7 @@ public class JsonMapper {
 		} catch (IOException e) {
 			String error = "Error in deserialize format to object";
 			LOG.error(error, e);
-			throw new IllegalStateException(error);
+			throw new RuntimeException(error);
 		}
 	}
 

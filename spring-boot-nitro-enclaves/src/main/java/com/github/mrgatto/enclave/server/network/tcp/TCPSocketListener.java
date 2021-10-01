@@ -17,7 +17,7 @@ public class TCPSocketListener implements Listener {
 
 	private ServerSocket serverSocket;
 
-	private Integer port;
+	private final Integer port;
 
 	public TCPSocketListener(Integer port) {
 		this.port = port;
@@ -27,7 +27,7 @@ public class TCPSocketListener implements Listener {
 	public void start() {
 		try {
 			LOG.info("Listening for connection on port {}...", this.port);
-			serverSocket = new ServerSocket(this.port);
+			this.serverSocket = new ServerSocket(this.port);
 		} catch (IOException e) {
 			LOG.error(e.toString(), e);
 			throw new RuntimeException(e);
@@ -42,7 +42,7 @@ public class TCPSocketListener implements Listener {
 
 	@Override
 	public ListenerConnection accept() throws IOException {
-		Socket clientSocket = serverSocket.accept();
+		Socket clientSocket = this.serverSocket.accept();
 		return new TCPSocketConnection(clientSocket);
 	}
 

@@ -10,7 +10,7 @@ import solutions.cloudarchitects.vsockj.VSock;
 
 public class VSocketConnection implements ListenerConnection {
 
-	private VSock socket;
+	private final VSock socket;
 
 	public VSocketConnection(VSock socket) {
 		this.socket = socket;

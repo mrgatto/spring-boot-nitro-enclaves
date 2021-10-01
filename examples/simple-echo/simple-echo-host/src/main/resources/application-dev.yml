@@ -1,4 +1,4 @@
 nitro:
-    enclave:
-       port: 5000
-       network-mode: tcp
+  enclave:
+    port: 5000
+    network-mode: tcp

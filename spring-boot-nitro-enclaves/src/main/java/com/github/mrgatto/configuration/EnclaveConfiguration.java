@@ -12,6 +12,8 @@ import com.github.mrgatto.enclave.server.network.Listener;
 import com.github.mrgatto.enclave.server.network.ListenerConsumer;
 import com.github.mrgatto.enclave.server.network.tcp.TCPSocketListener;
 import com.github.mrgatto.enclave.server.network.vsock.VSockListener;
+import com.github.mrgatto.network.DefaultSocketTLV;
+import com.github.mrgatto.network.SocketTLV;
 import com.github.mrgatto.utils.JsonMapper;
 
 @Configuration
@@ -21,30 +23,32 @@ public class EnclaveConfiguration {
 	private Integer port;
 
 	@Bean
+	@ConditionalOnMissingBean
+	public SocketTLV socketTLV() {
+		return new DefaultSocketTLV();
+	}
+
+	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "tcp", matchIfMissing = true)
 	public TCPSocketListener tcpSocketListener() {
-		TCPSocketListener tcpHostClient = new TCPSocketListener(this.port);
-		return tcpHostClient;
+		return new TCPSocketListener(this.port);
 	}
 
 	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "vsock")
 	public VSockListener vsockListener() {
-		VSockListener tcpHostClient = new VSockListener(this.port);
-		return tcpHostClient;
+		return new VSockListener(this.port);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
-	public ListenerConsumer listenerConsumer(JsonMapper jsonMapper) {
-		DefaultListenerConsumer listenerConsumer = new DefaultListenerConsumer(jsonMapper);
-		return listenerConsumer;
+	public ListenerConsumer listenerConsumer(JsonMapper jsonMapper, SocketTLV socketTLV) {
+		return new DefaultListenerConsumer(jsonMapper, socketTLV);
 	}
 
 	@Bean
 	public NitroEnclaveServer nitroEnclaveServer(Listener clientListener, ListenerConsumer listenerConsumer) {
-		NitroEnclaveServer nitroEnclaveServer = new NitroEnclaveServer(clientListener, listenerConsumer);
-		return nitroEnclaveServer;
+		return new NitroEnclaveServer(clientListener, listenerConsumer);
 	}
 
 }

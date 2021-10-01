@@ -3,8 +3,6 @@ package com.github.mrgatto.enclave.server.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -22,25 +21,29 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.mrgatto.enclave.handler.ActionHandler;
 import com.github.mrgatto.model.EnclaveRequest;
 import com.github.mrgatto.model.EnclaveResponse;
+import com.github.mrgatto.network.SocketTLV;
 import com.github.mrgatto.utils.JsonMapper;
-import com.github.mrgatto.utils.SocketTLV;
 
 public class DefaultListenerConsumer implements ListenerConsumer, ApplicationListener<ContextRefreshedEvent> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultListenerConsumer.class);
 
-	private List<ActionHandler<?, ?>> handlers;
+	private final List<ActionHandler<?, ?>> handlers;
 
-	private JsonMapper jsonMapper;
+	private final JsonMapper jsonMapper;
 
-	public DefaultListenerConsumer(JsonMapper jsonMapper) {
+	private final SocketTLV socketTLV;
+
+	public DefaultListenerConsumer(JsonMapper jsonMapper, SocketTLV socketTLV) {
 		this.jsonMapper = jsonMapper;
+		this.socketTLV = socketTLV;
 		this.handlers = new ArrayList<>();
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-		contextRefreshedEvent.getApplicationContext().getBeansOfType(ActionHandler.class).values()
+		contextRefreshedEvent.getApplicationContext().getBeansOfType(ActionHandler.class)
+			.values()
 			.forEach(handler -> this.handlers.add(handler));
 
 		String loadedHandlers = this.handlers.stream()
@@ -59,12 +62,12 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 			in = connection.getInputStream();
 			out = connection.getOutputStream();
 
-			byte[] rcvd = SocketTLV.receiveContent(in);
+			byte[] rcvd = this.socketTLV.receiveContent(in);
 			LOG.debug("Received {} bytes", rcvd.length);
 
 			byte[] output = this.processEnclaveRequest(rcvd);
 			LOG.debug("Sending {} bytes", output.length);
-			SocketTLV.sendContent(output, out);
+			this.socketTLV.sendContent(output, out);
 		} finally {
 			IOUtils.closeQuietly(in);
 			IOUtils.closeQuietly(out);
@@ -89,9 +92,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 			response.setIsError(true);
 			response.setError(e.getMessage());
 
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			response.setStacktrace(sw.toString());
+			response.setStacktrace(ExceptionUtils.getStackTrace(e));
 		} finally {
 			response.setDuration(Duration.between(now, Instant.now()).toMillis());
 		}
@@ -104,8 +105,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 		ActionHandler<?, ?> handler = this.getHandler(request);
 
 		LOG.debug("Executing handler {} for request {}", ClassUtils.getSimpleName(handler), request);
-		Object result = handler.execute(request);
-		return result;
+		return handler.execute(request);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

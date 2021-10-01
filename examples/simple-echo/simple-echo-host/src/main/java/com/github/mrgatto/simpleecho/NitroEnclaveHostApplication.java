@@ -9,6 +9,7 @@ import com.github.mrgatto.autoconfigure.EnableNitroEnclavesHostSide;
 import com.github.mrgatto.host.NitroEnclaveClient;
 import com.github.mrgatto.model.EnclaveRequest;
 import com.github.mrgatto.model.EnclaveResponse;
+import com.github.mrgatto.simlpeecho.Actions;
 import com.github.mrgatto.simlpeecho.model.MyPojoData;
 import com.github.mrgatto.simlpeecho.model.MyPojoDataResult;
 
@@ -26,7 +27,7 @@ public class NitroEnclaveHostApplication {
 		pojo.setValue("Hello World!");
 
 		EnclaveRequest<MyPojoData> request = new EnclaveRequest<>();
-		request.setAction("echo");
+		request.setAction(Actions.ECHO.name());
 		request.setData(pojo);
 
 		EnclaveResponse<MyPojoDataResult> resp = client.send(request);
