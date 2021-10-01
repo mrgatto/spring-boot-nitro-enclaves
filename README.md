@@ -19,19 +19,19 @@ which is usually secured by hardware.
 
 # Tools / Libs
 
-### [aws-nitro-enclaves-cli](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-cli-install.html)
+* [aws-nitro-enclaves-cli](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-cli-install.html)
 
-### kmstool-enclave-cli & libnsm.so
+* kmstool-enclave-cli & libnsm.so
 
-Build instructions at [kmstool-enclave-cli)](https://github.com/aws/aws-nitro-enclaves-sdk-c/tree/main/bin/kmstool-enclave-cli)
+ Build instructions at [kmstool-enclave-cli](https://github.com/aws/aws-nitro-enclaves-sdk-c/tree/main/bin/kmstool-enclave-cli).
 
-### vsockj
+* vsockj
 
 This project uses the _vsockj_ library for vsock communication.
-Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj)
+Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj).
 
 
 # Examples
 
-* [Hello World Echo](simple-echo)
-* [KMS Encrypt/Decrypt](kms-encrypt)
+* [Hello World Echo](examples/simple-echo)
+* [KMS Encrypt/Decrypt](examples/kms-encrypt)
