@@ -14,7 +14,7 @@ import com.github.mrgatto.network.SocketTLV;
 
 class DefaultSocketTLVTest {
 
-	private SocketTLV socketTLV = new DefaultSocketTLV();
+	private final SocketTLV socketTLV = new DefaultSocketTLV();
 
 	@Test
 	void writeReadTest() throws IOException {

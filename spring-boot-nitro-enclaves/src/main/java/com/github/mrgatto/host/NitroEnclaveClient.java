@@ -14,9 +14,9 @@ public class NitroEnclaveClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NitroEnclaveClient.class);
 
-	private JsonMapper jsonMapper;
+	private final JsonMapper jsonMapper;
 
-	private HostClient hostClient;
+	private final HostClient hostClient;
 
 	public NitroEnclaveClient(JsonMapper jsonMapper, HostClient hostClient) {
 		this.jsonMapper = jsonMapper;

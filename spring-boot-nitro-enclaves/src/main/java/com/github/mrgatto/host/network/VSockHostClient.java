@@ -18,7 +18,7 @@ public class VSockHostClient extends AbstractSocketHostClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(VSockHostClient.class);
 
-	private Integer cid;
+	private final Integer cid;
 
 	public VSockHostClient(Integer port, Integer cid, SocketTLV socketTLV) {
 		super(port, socketTLV);
