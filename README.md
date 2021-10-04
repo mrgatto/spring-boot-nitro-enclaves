@@ -16,6 +16,8 @@ which is usually secured by hardware.
 
 # Overview
 
+# Parameters
+
 
 # Tools / Libs
 
@@ -34,4 +36,4 @@ Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj).
 # Examples
 
 * [Hello World Echo](examples/simple-echo)
-* [KMS Encrypt/Decrypt](examples/kms-encrypt)
+* [KMS Decrypt](examples/kms-decrypt)

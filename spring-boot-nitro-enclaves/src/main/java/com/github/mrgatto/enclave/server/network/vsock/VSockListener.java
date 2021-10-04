@@ -39,7 +39,7 @@ public class VSockListener implements Listener {
 
 	@Override
 	public void close() {
-		LOG.info("Stoping...");
+		LOG.info("Stopping...");
 		IOUtils.closeQuietly(this.serverVSocket);
 	}
 
