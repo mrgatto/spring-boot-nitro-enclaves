@@ -3,8 +3,6 @@ package com.github.mrgatto.host.network;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +21,6 @@ public class VSockHostClient extends AbstractSocketHostClient {
 	public VSockHostClient(Integer port, Integer cid, SocketTLV socketTLV) {
 		super(port, socketTLV);
 		this.cid = cid;
-	}
-
-	@PostConstruct
-	private void init() {
-		LOG.info("Vocket Client on cid {}, port {}", this.cid, this.port);
 	}
 
 	@Override

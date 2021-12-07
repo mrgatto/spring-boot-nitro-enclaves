@@ -1,5 +1,7 @@
 package com.github.mrgatto.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,6 +19,8 @@ import com.github.mrgatto.utils.JsonMapper;
 @Configuration
 public class HostConfiguration {
 
+	private static final Logger LOG = LoggerFactory.getLogger(HostConfiguration.class);
+
 	@Value("${nitro.enclave.port:5000}")
 	private Integer port;
 
@@ -32,12 +36,14 @@ public class HostConfiguration {
 	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "tcp", matchIfMissing = true)
 	public HostClient tcpSocketHostClient(SocketTLV socketTLV) {
+		LOG.info("Creating TCP Socket Client on port {}...", this.port);
 		return new TCPSocketHostClient(this.port, socketTLV);
 	}
 
 	@Bean
 	@ConditionalOnProperty(value = "nitro.enclave.network-mode", havingValue = "vsock")
 	public HostClient vsockHostClient(SocketTLV socketTLV) {
+		LOG.info("Creating VSock Client on cid {}, port {}...", this.cid, this.port);
 		return new VSockHostClient(this.port, this.cid, socketTLV);
 	}
 

@@ -1,4 +1,4 @@
-package com.github.mrgatto.utils;
+package com.github.mrgatto.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,9 +8,6 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import com.github.mrgatto.network.DefaultSocketTLV;
-import com.github.mrgatto.network.SocketTLV;
 
 class DefaultSocketTLVTest {
 

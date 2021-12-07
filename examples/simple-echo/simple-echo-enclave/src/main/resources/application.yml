@@ -2,3 +2,7 @@ nitro:
   enclave:
     port: 5000
     network-mode: vsock
+
+logging:
+  level:
+    com.github: debug

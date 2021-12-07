@@ -63,10 +63,8 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 			out = connection.getOutputStream();
 
 			byte[] rcvd = this.socketTLV.receiveContent(in);
-			LOG.debug("Received {} bytes", rcvd.length);
 
 			byte[] output = this.processEnclaveRequest(rcvd);
-			LOG.debug("Sending {} bytes", output.length);
 			this.socketTLV.sendContent(output, out);
 		} finally {
 			IOUtils.closeQuietly(in);
@@ -105,7 +103,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 		ActionHandler<?, ?> handler = this.getHandler(request);
 
 		LOG.debug("Executing handler {} for request {}", ClassUtils.getSimpleName(handler), request);
-		return handler.execute(request);
+		return handler.handle(request);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

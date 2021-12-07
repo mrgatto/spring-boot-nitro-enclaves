@@ -14,6 +14,22 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.augustcellars.cose</groupId>
+			<artifactId>cose-java</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.62</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.62</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.mrgatto</groupId>
 			<artifactId>nitro-enclaves-simple-echo-commons</artifactId>
 			<version>${project.version}</version>
