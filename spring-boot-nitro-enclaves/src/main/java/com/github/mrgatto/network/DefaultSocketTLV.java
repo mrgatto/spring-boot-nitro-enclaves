@@ -1,58 +1,47 @@
 package com.github.mrgatto.network;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Conversion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 public class DefaultSocketTLV implements SocketTLV {
 
-	private static final int DEFAULT_BUFFER_SIZE = 1024;
-
-	private int bufferSize;
-
-	public DefaultSocketTLV() {
-		this(DEFAULT_BUFFER_SIZE);
-	}
-
-	public DefaultSocketTLV(int bufferSize) {
-		this.bufferSize = bufferSize;
-	}
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultSocketTLV.class);
 
 	@Override
 	public void sendContent(byte[] content, OutputStream output) throws IOException {
 		Assert.notNull(content, "content must not be null");
 		Assert.notNull(output, "output must not be null");
 
-		DataOutputStream dos = new DataOutputStream(output);
-		dos.writeInt(content.length);
-		dos.write(content);
+		LOG.trace("Writing {} bytes of data", content.length);
+
+		byte length[] = new byte[Integer.BYTES];
+	    Conversion.intToByteArray(content.length, 0, length, 0, length.length);
+
+	    output.write(length);
+	    output.write(content);
 	}
 
 	@Override
 	public byte[] receiveContent(InputStream input) throws IOException {
 		Assert.notNull(input, "input must not be null");
 
-		DataInputStream dis = new DataInputStream(input);
-		int len = dis.readInt();
+		byte[] bytes = new byte[Integer.BYTES];
+		IOUtils.read(input, bytes);
 
-		return this.receiveAll(dis, len);
-	}
+		int length = Conversion.byteArrayToInt(bytes, 0, 0, 0, bytes.length);
+		LOG.trace("Reading {} bytes of data", length);
 
-	private byte[] receiveAll(DataInputStream input, int length) throws IOException {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		byte[] buffer = new byte[length];
+		IOUtils.read(input, buffer);
 
-		while (output.size() < length) {
-			byte[] buffer = new byte[Math.min(this.bufferSize, length - output.size())];
-			input.read(buffer);
-			output.write(buffer);
-		}
-
-		return output.toByteArray();
+		return buffer;
 	}
 
 }

@@ -16,9 +16,9 @@ public class EchoHandler extends AbstractActionHandler<MyPojoData, MyPojoDataRes
 	}
 
 	@Override
-	public MyPojoDataResult execute(MyPojoData request) {
+	public MyPojoDataResult handle(MyPojoData data) {
 		MyPojoDataResult result = new MyPojoDataResult();
-		result.setValue("ECHO from Enclave: " + request.getValue());
+		result.setValue("ECHO from Enclave: " + data.getValue());
 
 		return result;
 	}

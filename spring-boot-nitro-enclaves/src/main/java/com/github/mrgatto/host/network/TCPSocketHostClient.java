@@ -4,8 +4,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +16,6 @@ public class TCPSocketHostClient extends AbstractSocketHostClient {
 
 	public TCPSocketHostClient(Integer port, SocketTLV socketTLV) {
 		super(port, socketTLV);
-	}
-
-	@PostConstruct
-	private void init() {
-		LOG.info("TCP Socket Client on port {}", this.port);
 	}
 
 	@Override

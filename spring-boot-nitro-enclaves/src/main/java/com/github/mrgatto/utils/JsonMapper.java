@@ -1,7 +1,5 @@
 package com.github.mrgatto.utils;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +19,6 @@ public class JsonMapper {
 
 	public JsonMapper(ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
-	}
-
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
 	}
 
 	public byte[] writeValueAsBytes(Object object) {
@@ -57,10 +51,10 @@ public class JsonMapper {
 		}
 	}
 
-	public <T> T readValue(byte[] src, Class<T> valueType) {
+	public <T> T readValue(String src, Class<T> valueType) {
 		try {
 			return this.objectMapper.readValue(src, valueType);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			String error = "Error in deserialize format to object";
 			LOG.error(error, e);
 			throw new RuntimeException(error);

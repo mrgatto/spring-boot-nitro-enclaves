@@ -24,7 +24,7 @@ public class NitroEnclaveClient {
 	}
 
 	public <IN, OUT> EnclaveResponse<OUT> send(EnclaveRequest<IN> request) {
-		Assert.notNull(hostClient, "hostClient must not be null");
+		Assert.notNull(this.hostClient, "hostClient must not be null");
 		Assert.notNull(request, "input must not be null");
 
 		LOG.info("Sending '{}' to enclave...", request);

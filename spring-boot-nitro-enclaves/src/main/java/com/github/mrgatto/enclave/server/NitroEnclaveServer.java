@@ -35,7 +35,7 @@ public class NitroEnclaveServer {
 	public void run() {
 		Assert.notNull(this.clientListener, "Listener must not be null");
 
-		LOG.info("Starting {} listener...", ClassUtils.getSimpleName(this.clientListener.getClass()));
+		LOG.info("Starting {} listener", ClassUtils.getSimpleName(this.clientListener.getClass()));
 		this.clientListener.start();
 
 		try {

@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.github.mrgatto.enclave.kms.DefaultKMSClient;
+import com.github.mrgatto.enclave.kms.KMSClient;
+import com.github.mrgatto.enclave.nsm.DefaultNsmClient;
+import com.github.mrgatto.enclave.nsm.NsmClient;
 import com.github.mrgatto.enclave.server.NitroEnclaveServer;
 import com.github.mrgatto.enclave.server.network.DefaultListenerConsumer;
 import com.github.mrgatto.enclave.server.network.Listener;
@@ -26,6 +30,18 @@ public class EnclaveConfiguration {
 	@ConditionalOnMissingBean
 	public SocketTLV socketTLV() {
 		return new DefaultSocketTLV();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public NsmClient nsmClient(JsonMapper jsonMapper) {
+		return new DefaultNsmClient(jsonMapper);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public KMSClient kmsClient() {
+		return new DefaultKMSClient();
 	}
 
 	@Bean

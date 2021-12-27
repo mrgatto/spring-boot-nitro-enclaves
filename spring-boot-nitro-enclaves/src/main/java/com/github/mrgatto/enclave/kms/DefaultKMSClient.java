@@ -8,22 +8,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import com.github.mrgatto.model.AWSCredential;
 
 /**
- * Default KMS Decrypt implementation that use provided AWS KMSTools.
+ * Default KMS client implementation that use provided KMSTools binary.
  * <p>
  * More info at https://github.com/aws/aws-nitro-enclaves-sdk-c/blob/main/docs/kmstool.md
  *
- *
  */
-@Component
-public class DefaultKMSDecryptor implements KMSDecryptor {
+public class DefaultKMSClient implements KMSClient {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultKMSDecryptor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultKMSClient.class);
 
 	@Value("${nitro.enclave.kmstool-enclave-cli:/app/kmstool_enclave_cli}")
 	private String kmsToolEnvlaveCli;
