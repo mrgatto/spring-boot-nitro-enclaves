@@ -2,6 +2,7 @@ nitro:
   enclave:
     port: 5000
     network-mode: vsock
+    #nsm-cli: /app/nsm-cli # default value
 
 logging:
   level:

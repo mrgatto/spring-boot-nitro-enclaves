@@ -5,7 +5,8 @@ WORKDIR /app
 COPY target/nitro-enclaves-simple-echo-enclave-1.0.0-SNAPSHOT.jar ./app.jar
 COPY run.sh ./run.sh
 
-COPY lib/libvsockj-native-1.0-SNAPSHOT.so /usr/lib/
+COPY libs/libvsockj-native-1.0-SNAPSHOT.so /usr/lib/
+COPY libs/nsm-cli ./nsm-cli
 
 RUN chmod +x /app/run.sh
 
