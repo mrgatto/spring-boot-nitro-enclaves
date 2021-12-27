@@ -51,4 +51,14 @@ public class JsonMapper {
 		}
 	}
 
+	public <T> T readValue(String src, Class<T> valueType) {
+		try {
+			return this.objectMapper.readValue(src, valueType);
+		} catch (Exception e) {
+			String error = "Error in deserialize format to object";
+			LOG.error(error, e);
+			throw new RuntimeException(error);
+		}
+	}
+
 }

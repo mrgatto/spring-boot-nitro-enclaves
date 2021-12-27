@@ -32,6 +32,8 @@ which is usually secured by hardware.
 This project uses the _vsockj_ library for vsock communication.
 Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj).
 
+* [nsm-cli](https://github.com/mrgatto/nsm-cli)
+
 
 # Examples
 
