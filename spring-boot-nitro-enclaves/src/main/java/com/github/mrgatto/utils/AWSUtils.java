@@ -11,7 +11,7 @@ import com.github.mrgatto.model.AWSCredential;
 import software.amazon.awssdk.regions.internal.util.EC2MetadataUtils;
 import software.amazon.awssdk.regions.internal.util.EC2MetadataUtils.IamSecurityCredential;
 
-public class AWSUtils {
+public final class AWSUtils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AWSUtils.class);
 

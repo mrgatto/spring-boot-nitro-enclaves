@@ -1,11 +1,13 @@
-# Spring Boot Nitro Enclave
+# Spring Boot Nitro Enclave  ![](https://api.codiga.io/project/29257/score/svg) ![](https://api.codiga.io/project/29257/score/svg)
+
+
 
 This is a working (and usable) _proof of concept_ Spring Boot library for easy creation of [AWS Nitro Enclaves](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) applications.
 
 **Objectives:**
 
 - Easy development of Nitro Enclaves applications.
-- Abstraction of the _vsock_ host-enclave communication, with a TCP implementaion for easy local development (even on Windows).
+- Abstraction of the _vsock_ host-enclave communication with a TCP implementaion for easy local development (even on Windows :sunglasses:). 
 - Ready-to-use integration with the Nitro Security Module (NSM).
 - Ready-to-use integration with the AWS KSM.
 
@@ -74,7 +76,7 @@ public class NitroEnclaveHostApplication {
    request.setAction("action_to_execute");
    request.setData(myPojo);
 
-   EnclaveResponse<MyPojoDataResult> resp = client.send(request);	  
+   EnclaveResponse<MyPojoDataResult> response = client.send(request);	  
   }
 }
 ```

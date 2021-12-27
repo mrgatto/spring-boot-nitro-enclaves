@@ -30,8 +30,8 @@ public class NitroEnclaveHostApplication {
 		request.setAction(Actions.ECHO.name());
 		request.setData(pojo);
 
-		EnclaveResponse<MyPojoDataResult> resp = client.send(request);
-		System.out.println(resp.getData().getValue());
+		EnclaveResponse<MyPojoDataResult> response = client.send(request);
+		System.out.println(response.getData().getValue());
 	}
 
 }
