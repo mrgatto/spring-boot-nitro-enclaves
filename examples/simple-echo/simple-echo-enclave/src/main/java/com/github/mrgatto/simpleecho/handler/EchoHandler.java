@@ -23,7 +23,7 @@ public class EchoHandler extends AbstractActionHandler<MyPojoData, MyPojoDataRes
 	@Override
 	public MyPojoDataResult handle(MyPojoData data) {
 		String nsmModuleId = this.nsmClient.describeNsm().getModuleId();
-		
+
 		MyPojoDataResult result = new MyPojoDataResult();
 		result.setValue("Echo from Enclave " + nsmModuleId + ": " + data.getValue());
 

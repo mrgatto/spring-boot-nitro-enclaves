@@ -4,11 +4,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.github.mrgatto.enclave.nsm.output.DescribeNsm;
+import com.github.mrgatto.enclave.nsm.output.DescribePcr;
 import com.github.mrgatto.utils.JsonMapper;
 
 /**
@@ -29,15 +31,26 @@ public class DefaultNsmClient implements NsmClient {
 
 	public DefaultNsmClient(JsonMapper jsonMapper) {
 		this.jsonMapper = jsonMapper;
-
 	}
 
 	@Override
 	public DescribeNsm describeNsm() {
+		String output = this.runNsmCliCommand("describe-nsm");
+		return this.jsonMapper.readValue(output, DescribeNsm.class);
+	}
+
+	@Override
+	public DescribePcr describePcr(int index) {
+		String output = this.runNsmCliCommand("describe-pcr", "-i", String.valueOf(index));
+		return this.jsonMapper.readValue(output, DescribePcr.class);
+	}
+
+	private String runNsmCliCommand(String... args) {
 		try {
 			LOG.info("Executing nsm-cli ({})...", this.nsmCli);
 
-			String[] cmd = new String[] { this.nsmCli, "describe-nsm" };
+			String[] cmd = new String[] { this.nsmCli };
+			cmd = ArrayUtils.addAll(cmd, args);
 
 			ProcessBuilder builder = new ProcessBuilder(Arrays.asList(cmd));
 			builder.inheritIO().redirectOutput(ProcessBuilder.Redirect.PIPE);
@@ -48,8 +61,7 @@ public class DefaultNsmClient implements NsmClient {
 
 			LOG.debug("nsm-cli output: {}", procOutput);
 
-			return this.jsonMapper.readValue(procOutput, DescribeNsm.class);
-
+			return procOutput;
 		} catch (Exception e) {
 			LOG.error("Cannot execute " + this.nsmCli, e);
 			throw new RuntimeException(e);
