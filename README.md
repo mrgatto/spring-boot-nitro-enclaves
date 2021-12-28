@@ -13,14 +13,13 @@ This is a working (and usable) _proof of concept_ Spring Boot library for easy c
 
 # Introduction
 
+An _enclave_ is a protected memory region that provides confidentiality for data and code execution. It is an instance of a Trusted Execution Environment (TEE)
+which is usually secured by hardware.
+
 An enclave application partitions itself into two components:
 
 1. An untrusted component (called the **host**) and
 2. A trusted component (called the **enclave**).
-
-An _enclave_ is a protected memory region that provides confidentiality for data
-and code execution. It is an instance of a Trusted Execution Environment (TEE)
-which is usually secured by hardware.
 
 # Overview
 
