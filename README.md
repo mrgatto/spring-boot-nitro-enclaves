@@ -1,4 +1,4 @@
-# Spring Boot Nitro Enclave  ![](https://api.codiga.io/project/29257/score/svg) ![](https://api.codiga.io/project/29257/score/svg)
+# Spring Boot Nitro Enclave  [![Java CI with Maven](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml/badge.svg)](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml) ![](https://api.codiga.io/project/29257/score/svg) ![](https://api.codiga.io/project/29257/score/svg)
 
 
 
