@@ -38,8 +38,7 @@ nitro-cli console --enclave-id $(nitro-cli describe-enclaves | jq -r '.[0].Encla
 ## Run Host App
 
 ```bash
-# from examples/simple-echo/simple-echo-host
-CID=5 java -jar target/nitro-enclaves-simple-echo-host-1.0.0-SNAPSHOT.jar
+CID=5 java -jar simple-echo-host/target/nitro-enclaves-simple-echo-host-1.0.0-SNAPSHOT.jar
 ```
 
 You should see the following output, where _i-09eb.._ is the Nitro Module ID:
