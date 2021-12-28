@@ -41,7 +41,7 @@ nitro-cli console --enclave-id $(nitro-cli describe-enclaves | jq -r '.[0].Encla
 CID=5 java -jar simple-echo-host/target/nitro-enclaves-simple-echo-host-1.0.0-SNAPSHOT.jar
 ```
 
-You should see the following output, where _i-09eb.._ is the Nitro Module ID:
+You should see the following output, where **i-09eb...** is the Nitro Module ID:
 
 ```bash
 Echo from Enclave i-09eb1f8c065b7f2e8-enc017dfd281b8c1930: Hello World!

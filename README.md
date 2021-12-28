@@ -24,6 +24,10 @@ which is usually secured by hardware.
 
 # Overview
 
+<p align="center">
+  <img src="docs/draw.io.drawio.png" />
+</p>
+
 ## Setup
 
 ### Enclave Application
