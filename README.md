@@ -7,9 +7,9 @@ This is a working (and usable) _proof of concept_ Spring Boot library for easy c
 **Objectives:**
 
 - Easy development of Nitro Enclaves applications.
-- Abstraction of the _vsock_ host-enclave communication with a TCP implementaion for easy local development (even on Windows :sunglasses:). 
+- Abstraction of the _vsock_ host-enclave communication with a TCP implementaion for easy local test/development (even on Windows :sunglasses:). 
 - Ready-to-use integration with the Nitro Security Module (NSM).
-- Ready-to-use integration with the AWS KSM.
+- Ready-to-use integration with the AWS KMS.
 
 # Introduction
 
