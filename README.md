@@ -1,4 +1,5 @@
-# Spring Boot Nitro Enclave [![Java CI with Maven](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml/badge.svg)](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml) [![Code Grade](https://api.codiga.io/project/29257/score/svg)](https://www.codiga.io)
+# Spring Boot Nitro Enclave
+[![Java CI with Maven](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml/badge.svg)](https://github.com/mrgatto/spring-boot-nitro-enclaves/actions/workflows/maven.yml) [![Code Grade](https://api.codiga.io/project/29257/score/svg)](https://www.codiga.io)
 
 
 
@@ -90,7 +91,7 @@ public class NitroEnclaveHostApplication {
 nitro:
   enclave:
     port: 5000
-    network-mode: vsock # or 'tcp' the default value for easy development
+    network-mode: vsock # or 'tcp' the default value for local dev
     nsm-cli: /app/nsm-cli # default value, for NSM integration
     kmstool-enclave-cli: /app/kmstool_enclave_cli # default value, for KMS integration
 ```
@@ -110,7 +111,7 @@ Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj).
 
 * [nsm-cli](https://github.com/mrgatto/nsm-cli)
 
-For interaction with the Nitro Security Model.
+For interaction with the Nitro Security Module.
 
 
 # Examples
