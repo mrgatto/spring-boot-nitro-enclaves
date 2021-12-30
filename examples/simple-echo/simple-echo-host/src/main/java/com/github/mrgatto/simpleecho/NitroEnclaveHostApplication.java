@@ -31,7 +31,16 @@ public class NitroEnclaveHostApplication {
 		request.setData(pojo);
 
 		EnclaveResponse<MyPojoDataResult> response = client.send(request);
-		System.out.println(response.getData().getValue());
+
+		if (response.getIsError()) {
+			System.out.println(String.format("Something went wrong: %s", response.getError()));
+			System.out.println(response.getErrorStacktrace());
+		} else {
+			System.out.println(response.getData().getValue());
+		}
+
+		System.out.println(String.format("Enclave execution time %sms", response.getDuration()));
+
 	}
 
 }

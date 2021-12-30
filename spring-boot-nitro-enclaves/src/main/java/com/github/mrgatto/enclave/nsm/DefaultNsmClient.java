@@ -64,7 +64,7 @@ public class DefaultNsmClient implements NsmClient {
 			return procOutput;
 		} catch (Exception e) {
 			LOG.error("Cannot execute " + this.nsmCli, e);
-			throw new RuntimeException(e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 

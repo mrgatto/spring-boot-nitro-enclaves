@@ -29,9 +29,9 @@ public class EnclaveResponse<T> {
 	@JsonInclude(Include.NON_NULL)
 	private String error;
 
-	@JsonProperty("stacktrace")
+	@JsonProperty("errorStacktrace")
 	@JsonInclude(Include.NON_NULL)
-	private String stacktrace;
+	private String errorStacktrace;
 
 	public String getAction() {
 		return action;
@@ -81,12 +81,12 @@ public class EnclaveResponse<T> {
 		this.error = error;
 	}
 
-	public String getStacktrace() {
-		return stacktrace;
+	public String getErrorStacktrace() {
+		return errorStacktrace;
 	}
 
-	public void setStacktrace(String stacktrace) {
-		this.stacktrace = stacktrace;
+	public void setErrorStacktrace(String errorStacktrace) {
+		this.errorStacktrace = errorStacktrace;
 	}
 
 	@Override

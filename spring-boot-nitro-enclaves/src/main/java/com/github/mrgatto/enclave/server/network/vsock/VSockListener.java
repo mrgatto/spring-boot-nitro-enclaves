@@ -32,8 +32,8 @@ public class VSockListener implements Listener {
 			this.serverVSocket = new ServerVSock();
 			this.serverVSocket.bind(new VSockAddress(VSockAddress.VMADDR_CID_ANY, this.port));
 		} catch (IOException e) {
-			LOG.error(e.toString(), e);
-			throw new RuntimeException(e);
+			LOG.error("Errror creating VSock ServerSocket", e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 

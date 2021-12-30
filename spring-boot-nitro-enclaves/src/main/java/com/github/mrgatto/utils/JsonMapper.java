@@ -27,7 +27,7 @@ public class JsonMapper {
 		} catch (JsonProcessingException e) {
 			String error = "Error in serialize object to format";
 			LOG.error(error, e);
-			throw new RuntimeException(error);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
@@ -37,7 +37,7 @@ public class JsonMapper {
 		} catch (JsonProcessingException e) {
 			String error = "Error in serialize object to format";
 			LOG.error(error, e);
-			throw new RuntimeException(error);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class JsonMapper {
 		} catch (Exception e) {
 			String error = "Error in deserialize format to object";
 			LOG.error(error, e);
-			throw new RuntimeException(error);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class JsonMapper {
 		} catch (Exception e) {
 			String error = "Error in deserialize format to object";
 			LOG.error(error, e);
-			throw new RuntimeException(error);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 

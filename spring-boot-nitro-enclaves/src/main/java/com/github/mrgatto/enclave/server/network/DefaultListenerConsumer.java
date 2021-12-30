@@ -90,7 +90,7 @@ public class DefaultListenerConsumer implements ListenerConsumer, ApplicationLis
 			response.setIsError(true);
 			response.setError(e.getMessage());
 
-			response.setStacktrace(ExceptionUtils.getStackTrace(e));
+			response.setErrorStacktrace(ExceptionUtils.getStackTrace(e));
 		} finally {
 			response.setDuration(Duration.between(now, Instant.now()).toMillis());
 		}

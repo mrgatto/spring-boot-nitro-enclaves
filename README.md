@@ -8,9 +8,12 @@ This is a working (and usable) _proof of concept_ Spring Boot library for easy c
 **Objectives:**
 
 - Easy development of Nitro Enclaves applications.
-- Abstraction of the _vsock_ host-enclave communication with a TCP implementaion for easy local test/development (even on Windows :sunglasses:). 
+- Abstraction of the _vsock_ host-enclave communication with a mock mode, TCP implementaion for easy local test/development (even on Windows :sunglasses:). 
+- Schemaless with automatic serialization/deserialization (JSON, further improvement should be BSON)
 - Ready-to-use integration with the Nitro Security Module (NSM).
 - Ready-to-use integration with the AWS KMS.
+
+<h5>* Some ideas came from <a href="https://developer.r3.com/conclave/">R3 Conclave</a></h5>
 
 # Introduction
 
@@ -80,7 +83,16 @@ public class NitroEnclaveHostApplication {
    request.setAction("action_to_execute");
    request.setData(myPojo);
 
-   EnclaveResponse<MyPojoDataResult> response = client.send(request);	  
+   EnclaveResponse<MyPojoDataResult> response = client.send(request);	
+
+	if (response.getIsError()) {
+		System.out.println(String.format("Something went wrong: %s", response.getError()));
+		System.out.println(response.getErrorStacktrace());
+	} else {
+		System.out.println(response.getData().getValue());
+	}
+
+	System.out.println(String.format("Enclave execution time %sms", response.getDuration()));   
   }
 }
 ```

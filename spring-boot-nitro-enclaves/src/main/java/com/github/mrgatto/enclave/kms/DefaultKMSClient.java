@@ -62,7 +62,7 @@ public class DefaultKMSClient implements KMSClient {
 
 		} catch (Exception e) {
 			LOG.error("Cannot execute " + this.kmsToolEnvlaveCli, e);
-			throw new RuntimeException(e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 

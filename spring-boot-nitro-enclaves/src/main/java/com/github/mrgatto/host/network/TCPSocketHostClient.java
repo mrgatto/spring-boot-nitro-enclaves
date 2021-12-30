@@ -39,7 +39,7 @@ public class TCPSocketHostClient extends AbstractSocketHostClient {
 
 		} catch (Exception e) {
 			LOG.error("Socket error", e);
-			throw new RuntimeException(e);
+			throw new RuntimeException(e.getMessage(), e);
 		} finally {
 			IOUtils.closeQuietly(out);
 			IOUtils.closeQuietly(in);

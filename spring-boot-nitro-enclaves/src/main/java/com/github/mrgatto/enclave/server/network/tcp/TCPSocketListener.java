@@ -29,8 +29,8 @@ public class TCPSocketListener implements Listener {
 			LOG.info("Listening for connection on port {}...", this.port);
 			this.serverSocket = new ServerSocket(this.port);
 		} catch (IOException e) {
-			LOG.error(e.toString(), e);
-			throw new RuntimeException(e);
+			LOG.error("Errror creating TCP ServerSocket", e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
