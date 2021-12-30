@@ -31,7 +31,9 @@ An enclave application partitions itself into two components:
   <img src="docs/draw.io.drawio.png" />
 </p>
 
-## Setup
+## Usage
+
+See project [examples](#examples) below.
 
 ### Enclave Application
 
@@ -126,7 +128,7 @@ Build instructions at [vsockj](https://github.com/Cloud-Architects/vsockj).
 For interaction with the Nitro Security Module.
 
 
-# Examples
+# Examples <a name="examples"></a>
 
 * [Hello World Echo](examples/simple-echo)
 * [KMS Decrypt](examples/kms-decrypt)
