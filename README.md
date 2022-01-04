@@ -51,7 +51,9 @@ public class NitroEnclaveApplication {
   }
 }
 
-// -- Handlers
+// -----
+// Your business logic handlers
+// -----
 
 @Component
 public class MyActionHandler extends AbstractActionHandler<MyPojoData, MyPojoDataResult> {
@@ -80,10 +82,12 @@ public class NitroEnclaveHostApplication {
    ApplicationContext ctx = SpringApplication.run(NitroEnclaveHostApplication.class, args);
    NitroEnclaveClient client = ctx.getBean(NitroEnclaveClient.class);
 
+   // -----
    // Your Enclave interaction
+   // -----
    EnclaveRequest<MyPojoData> request = new EnclaveRequest<>();
    request.setAction("action_to_execute");
-   request.setData(myPojo);
+   request.setData(myPojoData);
 
    EnclaveResponse<MyPojoDataResult> response = client.send(request);	
 
