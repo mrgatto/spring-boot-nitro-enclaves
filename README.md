@@ -109,7 +109,7 @@ public class NitroEnclaveHostApplication {
 nitro:
   enclave:
     port: 5000
-    network-mode: vsock # or 'tcp' the default value for local dev
+    network-mode: vsock # default is 'tcp'
     nsm-cli: /app/nsm-cli # default value, for NSM integration
     kmstool-enclave-cli: /app/kmstool_enclave_cli # default value, for KMS integration
 ```
