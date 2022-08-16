@@ -37,6 +37,8 @@ nitro-cli console --enclave-id $(nitro-cli describe-enclaves | jq -r '.[0].Encla
 
 ## Run Host App
 
+Ensure that you have  the lib [libvsockj-native-1.0-SNAPSHOT.so](../../prebuild-libs) somewhere on your Java Classpath. Usually you can just copy it to */usr/lib64*.
+
 ```bash
 CID=5 java -jar simple-echo-host/target/nitro-enclaves-simple-echo-host-1.0.0-SNAPSHOT.jar
 ```
